@@ -22,7 +22,7 @@ int ImageBrightener::BrightenWholeImage() {
     return attenuatedPixelCount;
 }
 
-bool ImageBrightener::AddBrighteningImage(std::shared_ptr<Image> imageToAdd, int& attenuatedCount) {
+bool ImageBrightener::AddBrighteningImage(const std::shared_ptr<Image> imageToAdd, int& attenuatedCount) {
     if (imageToAdd->m_rows != m_inputImage->m_rows || imageToAdd->m_columns != m_inputImage->m_columns) {
         return false;
     }
@@ -34,7 +34,7 @@ bool ImageBrightener::AddBrighteningImage(std::shared_ptr<Image> imageToAdd, int
                 ++attenuatedCount;
                 m_inputImage->pixels[pixelIndex] = 255;
             } else {
-                imageToAdd->pixels[pixelIndex] += m_inputImage->pixels[pixelIndex];
+                m_inputImage->pixels[pixelIndex] += imageToAdd->pixels[pixelIndex];
             }
         }
     }
